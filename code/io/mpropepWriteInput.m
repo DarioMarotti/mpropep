@@ -44,6 +44,10 @@
 % --- solverArg1: Chamber Pressure [Pa]
 % --- solverArg2: Exit Area Ratio [Pa]
 
+%Changelog:
+% >Version 1.1: 22/01/23- Dario Marotti
+%   - added command to create directory
+
 function [] = mpropepWriteInput( ...
                                 listPropellantID, ...
                                 listPropellantMass, ...
@@ -66,7 +70,10 @@ function [] = mpropepWriteInput( ...
     
     % Open input file
     if ~exist("path","var")
-        inputFile = fopen('.mpropep\input.txt','w');
+        if  ~exist(".mpropep","dir")
+            mkdir(".mpropep")
+        end
+        inputFile = fopen('.mpropep/input.txt','w');
     else
         inputFile = fopen(path,'w');
     end
